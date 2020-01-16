@@ -4,26 +4,12 @@ from subprocess import Popen
 from subprocess import PIPE
 
 
-def has_gpu():
-    try:
-        p = Popen(["nvidia-smi"], stdout=PIPE)
-        stdout, stderror = p.communicate()
-        return True
-
-    except Exception:
-        return False
-
-
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
 
 install_requires = ["numpy"]
-if has_gpu():
-    install_requires.append("tensorflow-gpu>=1.6")
-else:
-    install_requires.append("tensorflow>=1.6")
-
+install_requires.append("tensorflow-gpu>=1.6")
 
 setup(
     name="tf_metrics",
